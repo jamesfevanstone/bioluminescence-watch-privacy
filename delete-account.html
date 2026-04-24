@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bioluminescence Watch — Delete Account</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Outfit', -apple-system, sans-serif;
+    background: #040d1a;
+    color: #c8dce8;
+    line-height: 1.75;
+    padding: 40px 20px 80px;
+  }
+  .container { max-width: 580px; margin: 0 auto; }
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #162a4a;
+  }
+  .logo { font-size: 32px; margin-bottom: 8px; filter: drop-shadow(0 0 8px #00e5ff66); }
+  h1 { font-size: 24px; font-weight: 600; color: #e8f4fc; margin-bottom: 4px; }
+  .subtitle { color: #5a7a94; font-size: 14px; }
+  .section {
+    background: #0a1628;
+    border: 1px solid #162a4a;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  h2 { font-size: 16px; font-weight: 600; color: #e8f4fc; margin-bottom: 12px; }
+  p { margin-bottom: 14px; font-size: 15px; }
+  ul { margin: 0 0 16px 20px; font-size: 15px; }
+  li { margin-bottom: 6px; }
+  a { color: #00e5ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .highlight { color: #00e5ff; font-weight: 500; }
+  .warning { color: #ff4a6e; }
+  label {
+    display: block;
+    color: #5a7a94;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    margin-top: 16px;
+  }
+  input, textarea {
+    width: 100%;
+    background: #040d1a;
+    border: 1px solid #162a4a;
+    border-radius: 8px;
+    color: #c8dce8;
+    padding: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    outline: none;
+  }
+  input:focus, textarea:focus { border-color: #00e5ff66; }
+  textarea { min-height: 80px; resize: vertical; }
+  .submit-btn {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    background: #ff4a6e;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .submit-btn:hover { opacity: 0.85; }
+  .success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .success .icon { font-size: 40px; margin-bottom: 12px; }
+  .success h2 { font-size: 20px; margin-bottom: 8px; }
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #162a4a;
+    text-align: center;
+    color: #5a7a94;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">◉</div>
+    <h1>Delete Your Account</h1>
+    <p class="subtitle">Bioluminescence Watch</p>
+  </div>
+
+  <div id="form-section">
+    <div class="section">
+      <h2>What happens when you delete your account</h2>
+      <p>When you request account deletion, we will permanently remove:</p>
+      <ul>
+        <li>Your account and login credentials</li>
+        <li>All sighting reports you have submitted</li>
+        <li>All photos you have uploaded</li>
+        <li>Your username and profile information</li>
+        <li>All likes you have given</li>
+      </ul>
+      <p class="warning">This action is permanent and cannot be undone.</p>
+      <p>We will process your request within 7 days. You will receive a confirmation email when your data has been deleted.</p>
+    </div>
+
+    <div class="section">
+      <h2>Request deletion</h2>
+      <p>Please provide the email address associated with your account so we can verify your identity and process the request.</p>
+
+      <label>EMAIL ADDRESS</label>
+      <input type="email" id="email" placeholder="The email you signed up with" required>
+
+      <label>REASON (OPTIONAL)</label>
+      <textarea id="reason" placeholder="Let us know why you're leaving — this helps us improve"></textarea>
+
+      <button class="submit-btn" onclick="submitRequest()">Request Account Deletion</button>
+    </div>
+  </div>
+
+  <div class="section success" id="success-section">
+    <div class="icon">✓</div>
+    <h2>Request received</h2>
+    <p>We'll process your deletion request within 7 days and send a confirmation to your email address.</p>
+  </div>
+
+  <div class="footer">
+    <p>◉ Bioluminescence Watch · © 2026</p>
+    <p style="margin-top: 8px;"><a href="YOUR_PRIVACY_POLICY_URL">Privacy Policy</a></p>
+  </div>
+</div>
+
+<script>
+function submitRequest() {
+  const email = document.getElementById('email').value.trim();
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  // In production, this would send to your backend or email
+  // For now, construct a mailto link
+  const reason = document.getElementById('reason').value.trim();
+  const subject = encodeURIComponent('Account Deletion Request — Bioluminescence Watch');
+  const body = encodeURIComponent(
+    'Account deletion request\n\n' +
+    'Email: ' + email + '\n' +
+    'Reason: ' + (reason || 'Not provided') + '\n\n' +
+    'Please delete my account and all associated data.'
+  );
+
+  window.location.href = 'mailto:YOUR_EMAIL?subject=' + subject + '&body=' + body;
+
+  document.getElementById('form-section').style.display = 'none';
+  document.getElementById('success-section').style.display = 'block';
+}
+</script>
+</body>
+</html>
